@@ -48,6 +48,33 @@ Upon execution, the script will:
 
 ---
 
+## 🕵️ Hiring Team Evaluation Guide
+
+This guide is designed for the hiring team to evaluate the correctness, modularity, and responsiveness of the system.
+
+### 1. Verification of Non-Trivial Generation
+To test how dynamically the system responds to custom support inquiries:
+- Open [main.py](file:///Users/rahulsrivastava/Hiver-challenge/main.py) and modify the simulated emails in the `test_tickets` array (starting on line 8).
+- Modify the `incoming_email` details or categories.
+- Update the `ground_truth_points` to define the success parameters.
+- Re-run `./venv/bin/python main.py` to check if the generator adapts its resolution steps and if the judge correctly scores the modifications.
+
+### 2. Inspecting the Audit Trail (Factual Integrity)
+Our pipeline saves a detailed audit trace in `evaluation_results.csv`:
+- Open `evaluation_results.csv` in the repository root.
+- Verify the `reasoning` column for each test case. You will find step-by-step rationales detailing exactly which ground truth points were matched, how the tone met the criteria, and whether the actionability checks succeeded.
+
+### 3. Testing Missing Configurations
+To test the error-handling mechanism:
+- Temporarily rename your `.env` file to `.env.bak` and run the orchestrator:
+  ```bash
+  ./venv/bin/python main.py
+  ```
+- The application will raise a clean `ValueError: CRITICAL: OPENAI_API_KEY is missing from your .env file.` and exit immediately, proving the validation logic is secure.
+
+---
+
+
 ## 🎓 Architecture Decisions & Trade-Offs
 
 ### 🧠 LLM-as-a-Judge vs. Lexical Metrics (BLEU / ROUGE)
