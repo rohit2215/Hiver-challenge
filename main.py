@@ -42,6 +42,58 @@ test_tickets = [
             "Advise the customer to implement client-side exponential backoff and retry mechanisms to gracefully handle rate limit exceptions.",
             "Suggest discussing a tier upgrade for a permanent limit increase if their baseline traffic remains above the standard limit."
         ]
+    },
+    {
+        "id": "TEST-TICKET-003",
+        "category": "Billing Discrepancy",
+        "incoming_email": (
+            "Subject: Issue with recent invoice INV-99050\n\n"
+            "Dear Support,\nWe just reviewed our billing statements and noticed a charge of $150. "
+            "According to our subscription plan (Growth Tier), we should only be charged $50. "
+            "It looks like an extra $100 contact overage fee was added, but our active contacts "
+            "are only at 4,300 (which is under the 5,000 threshold). Can you audit this invoice "
+            "and issue a credit?\n\n"
+            "Regards,\nEmma Watson\nOps Team at TechStart"
+        ),
+        "ground_truth_points": [
+            "Acknowledge that the customer was incorrectly billed $150 instead of the $50 Growth tier flat rate.",
+            "Explain that the issue was due to an incorrect contact overage fee charge despite active contacts being below the limit.",
+            "Confirm that a one-time $100 credit is being processed to resolve the discrepancy.",
+            "State clearly that the credit processing will take approximately 3 to 5 business days to reflect on the account."
+        ]
+    },
+    {
+        "id": "TEST-TICKET-004",
+        "category": "Billing Discrepancy",
+        "incoming_email": (
+            "Subject: Billing Dispute: Overage Fee Charge on INV-99088\n\n"
+            "Hello, we were billed an extra $100 contact overage fee on our latest invoice INV-99088. "
+            "We are on the Growth tier, which is $50 flat. Please remove this fee and refund us. "
+            "We currently have 6,100 active contacts.\n\n"
+            "Regards,\nJames Howlett\nLogan Corp"
+        ),
+        "ground_truth_points": [
+            "Explain that the Growth tier flat rate covers up to 5,000 active contacts.",
+            "Clarify that because they have 6,100 active contacts (which exceeds the 5,000 contact limit), the $100 contact overage fee is correct and cannot be credited.",
+            "Suggest upgrading their plan to a higher tier or cleaning up active contacts to avoid future overage charges."
+        ]
+    },
+    {
+        "id": "TEST-TICKET-005",
+        "category": "API Integration Error",
+        "incoming_email": (
+            "Subject: URGENT: 429 Errors Blocking Production Event Sync\n\n"
+            "Hi, our event synchronization is failing completely with HTTP 429 Too Many Requests errors. "
+            "We had a massive marketing launch and traffic spiked to 10,000 RPM on our end. "
+            "We need a temporary limit increase to 10,000 RPM immediately, our production relies on this!\n\n"
+            "Thanks,\nBruce Wayne\nWayne Enterprises"
+        ),
+        "ground_truth_points": [
+            "Explain that the HTTP 429 errors occurred because requests spiked to 10,000 RPM, which drastically exceeds their standard rate limit of 600 RPM on the /v1/events endpoint.",
+            "Inform them that we have temporarily bumped their rate limit to 800 RPM for the next 24 hours as a courtesy, but clarify that this will not support their 10,000 RPM volume.",
+            "Advise the customer to implement client-side exponential backoff and retries to avoid dropping requests during high traffic spikes.",
+            "Suggest discussing a tier upgrade to the Enterprise tier for a permanent, custom high-volume rate limit."
+        ]
     }
 ]
 
