@@ -120,3 +120,15 @@ Leverages the Structured Outputs API by parsing responses directly into a struct
 
 ### 4. `main.py`
 The workflow orchestrator that processes test support tickets, calculates the final score using a weighted sum (`50% Factual + 25% Tone + 25% Actionability`), and prints a tabular summary along with an aggregate performance grid.
+
+---
+
+## 🤖 AI Tools & Technologies Used
+
+This repository was designed, built, and tested utilizing the following AI tools and developer platforms:
+
+- **OpenAI GPT-4o-mini:** Used as the generation engine for crafting context-grounded suggested replies and as the LLM Judge for evaluating response quality.
+- **OpenAI Structured Outputs API:** Utilized via `client.beta.chat.completions.parse` to enforce strict Pydantic structures for deterministic scoring and structured reasoning auditing.
+- **Antigravity AI Agent & Antigravity IDE:** Utilized for end-to-end codebase orchestration, context-aware package isolation (managing macOS PEP 668 constraints), test suite creation, and automated version control delivery.
+
+
